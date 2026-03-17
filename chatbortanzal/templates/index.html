@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anzal Hussain | Cyber Emerald AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="holographic-overlay"></div>
+    <div class="background-grid"></div>
+    
+    <main class="container">
+        <header class="cyber-header">
+            <div class="header-content">
+                <h1 class="glitch-text" data-text="ANZAL HUSSAIN">ANZAL HUSSAIN</h1>
+                <p class="subtitle">AI/ML Researcher & Poet</p>
+                <div class="status-indicator">
+                    <span class="pulse"></span> ONLINE
+                </div>
+            </div>
+        </header>
+
+        <section class="chat-interface" id="chat-interface">
+            <div class="chat-window" id="chat-window">
+                <div class="message assistant-message floating-card">
+                    <div class="message-content">
+                        <p>Welcome to the Cyber Emerald interface. I am Anzal's AI double. How can I assist you in this neon-lit digital realm today? 🌌💡</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="suggestions" id="suggestions">
+                    <button class="suggestion-chip">Tell me about Alzheimer's project</button>
+                    <button class="suggestion-chip">Read a Ghazal</button>
+                    <button class="suggestion-chip">What are your skills?</button>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" id="user-input" placeholder="Initiate neural link..." autocomplete="off">
+                    <button id="send-btn" class="send-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

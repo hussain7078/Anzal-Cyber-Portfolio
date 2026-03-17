@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk With Anzal | AI Neural Interface</title>
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        :root {
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.4);
+            --cyan: #06b6d4;
+            --dark-bg: #050505;
+            --sidebar-bg: #0d0d0d;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(16, 185, 129, 0.15);
+            --sidebar-width: 280px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="light"] {
+            --dark-bg: #f8fafc;
+            --sidebar-bg: #f1f5f9;
+            --glass: rgba(0, 0, 0, 0.02);
+            --glass-border: rgba(16, 185, 129, 0.1);
+            color: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #e2e8f0;
+            font-family: 'Outfit', sans-serif;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .new-chat-btn {
+            background: transparent;
+            border: 1px solid var(--emerald);
+            color: var(--emerald);
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 25px;
+        }
+
+        .new-chat-btn:hover {
+            background: var(--emerald);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        .history-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .chat-history {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .history-item {
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: var(--transition);
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-item:hover {
+            background: var(--glass);
+            color: var(--emerald);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--emerald), var(--cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        header {
+            height: 70px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .model-selector {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .model-selector:hover {
+            border-color: var(--emerald);
+        }
+
+        .theme-toggle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--emerald);
+            color: var(--dark-bg);
+        }
+
+        /* --- Message Display Area --- */
+        #chat-scroller {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            scroll-behavior: smooth;
+        }
+
+        .message-container {
+            width: 100%;
+            display: flex;
+            padding: 0 15%;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-content {
+            display: flex;
+            gap: 20px;
+            max-width: 100%;
+        }
+
+        .msg-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bot-icon {
+            background: var(--emerald);
+            color: var(--dark-bg);
+            box-shadow: 0 0 10px var(--emerald-glow);
+        }
+
+        .user-icon {
+            background: #334155;
+            color: white;
+        }
+
+        .text-wrap {
+            flex: 1;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            white-space: pre-wrap;
+        }
+
+        .text-wrap code {
+            font-family: 'Space Grotesk', monospace;
+            background: #1e293b;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .text-wrap pre {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* --- Floating Avatar / Orb --- */
+        .ai-orb-container {
+            position: absolute;
+            top: 100px;
+            right: 50px;
+            width: 150px;
+            height: 150px;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .orb {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--emerald) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            animation: orbPulse 6s infinite alternate;
+        }
+
+        @keyframes orbPulse {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* --- Footer Input --- */
+        .footer-area {
+            padding: 20px 15%;
+            position: relative;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .action-chip {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .action-chip:hover {
+            border-color: var(--emerald);
+            background: rgba(16, 185, 129, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-wrapper {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: var(--transition);
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--emerald);
+            box-shadow: 0 0 20px var(--emerald-glow);
+        }
+
+        textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 1.05rem;
+            font-family: inherit;
+            resize: none;
+            max-height: 200px;
+            padding: 10px 0;
+            line-height: 1.5;
+        }
+
+        .input-btns {
+            display: flex;
+            gap: 12px;
+            padding-bottom: 5px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .icon-btn:hover {
+            color: var(--emerald);
+            background: var(--glass);
+        }
+
+        .send-btn {
+            background: var(--emerald);
+            color: var(--dark-bg);
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--emerald);
+        }
+
+        /* --- Loading Animation --- */
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            animation: dotWave 1.4s infinite linear;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotWave {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar { width: 0; padding: 0; overflow: hidden; border: none; }
+            .message-container { padding: 0 5%; }
+            .footer-area { padding: 20px 5%; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <button class="new-chat-btn" onclick="startNewChat()">
+            <i class="fas fa-plus"></i> New Neural Link
+        </button>
+
+        <div class="history-label">Neural Records</div>
+        <div class="chat-history" id="history-container">
+            <!-- Will be populated by JS -->
+            <div class="history-item"><i class="far fa-message"></i> Recent Dialogue #1</div>
+            <div class="history-item"><i class="far fa-message"></i> AI Architecture Sync</div>
+            <div class="history-item"><i class="far fa-message"></i> Ghazal Interpretations</div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-avatar">AH</div>
+            <div>
+                <div style="font-weight: 700; font-size: 0.9rem;">Anzal Hussain</div>
+                <div style="font-size: 0.75rem; color: #64748b;">AI/ML System</div>
+            </div>
+            <i class="fas fa-ellipsis" style="margin-left: auto; cursor: pointer;"></i>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <div class="header-left">
+                <i class="fas fa-bars" style="cursor: pointer; font-size: 1.2rem;" onclick="toggleSidebar()"></i>
+                <select class="model-selector">
+                    <option>Llama 3.3 (Versatile)</option>
+                    <option>Neural Link v4.0 (Experimental)</option>
+                </select>
+            </div>
+            <div class="header-right" style="display: flex; gap: 20px; align-items: center;">
+                <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Matrix Filter">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div style="font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--emerald);">CORE ACTIVE</div>
+            </div>
+        </header>
+
+        <!-- 3D Decor -->
+        <div class="ai-orb-container">
+            <div class="orb"></div>
+        </div>
+
+        <!-- Chat Area -->
+        <div id="chat-scroller">
+            <div class="message-container">
+                <div class="message-content">
+                    <div class="msg-icon bot-icon"><i class="fas fa-robot"></i></div>
+                    <div class="text-wrap">
+                        Ah, welcome to my neural interface! I am the digital reflection of Anzal Hussain. 🌌
+
+Whether you want to discuss AI architecture, deep learning, or perhaps share a moment of Urdu poetry, I am here. 
+
+How shall we begin our dialogue?
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Area -->
+        <footer class="footer-area">
+            <div class="quick-actions">
+                <div class="action-chip" onclick="quickAction('latest project')">Summarize My Projects</div>
+                <div class="action-chip" onclick="quickAction('explain rag')">Explain RAG Architecture</div>
+                <div class="action-chip" onclick="quickAction('urdu poem')">Share a Ghazal</div>
+            </div>
+
+            <div class="input-wrapper">
+                <button class="icon-btn"><i class="fas fa-paperclip"></i></button>
+                <textarea id="chat-input" placeholder="Initiate neural link..." rows="1" oninput="autoResize(this)"></textarea>
+                <div class="input-btns">
+                    <button class="icon-btn"><i class="fas fa-microphone"></i></button>
+                    <button class="icon-btn send-btn" id="send-btn" onclick="handleChat()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.7rem; color: #64748b; margin-top: 10px;">
+                Anzal AI can make errors. Verify technical info from Anzal's official papers.
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        const chatScroller = document.getElementById('chat-scroller');
+        const chatInput = document.getElementById('chat-input');
+        const themeBody = document.body;
+        const historyContainer = document.getElementById('history-container');
+        const modelSelector = document.querySelector('.model-selector');
+
+        let currentChatHistory = [];
+        let savedChats = JSON.parse(localStorage.getItem('anzal_chats')) || [];
+
+        // Marked.js config for highlighted code
+        marked.setOptions({
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            },
+            breaks: true
+        });
+
+        // Initialize
+        window.onload = () => {
+            renderHistoryList();
+            const lastTheme = localStorage.getItem('anzal_theme') || 'dark';
+            themeBody.setAttribute('data-theme', lastTheme);
+            document.querySelector('.theme-toggle i').className = lastTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            chatInput.focus();
+        };
+
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar.style.width === '0px' || sidebar.style.width === '0') {
+                sidebar.style.width = 'var(--sidebar-width)';
+                sidebar.style.padding = '20px';
+            } else {
+                sidebar.style.width = '0px';
+                sidebar.style.padding = '0';
+            }
+        }
+
+        function toggleTheme() {
+            const current = themeBody.getAttribute('data-theme');
+            const target = current === 'dark' ? 'light' : 'dark';
+            themeBody.setAttribute('data-theme', target);
+            localStorage.setItem('anzal_theme', target);
+            document.querySelector('.theme-toggle i').className = target === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        function appendMessage(text, role, skipSave = false) {
+            const container = document.createElement('div');
+            container.className = 'message-container';
+            
+            const content = `
+                <div class="message-content">
+                    <div class="msg-icon ${role}-icon">
+                        <i class="fas ${role === 'bot' ? 'fa-robot' : 'fa-user'}"></i>
+                    </div>
+                    <div class="text-wrap">${role === 'bot' ? marked.parse(text) : text}</div>
+                </div>
+            `;
+            container.innerHTML = content;
+            chatScroller.appendChild(container);
+            chatScroller.scrollTop = chatScroller.scrollHeight;
+            
+            // Re-highlight
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+
+            if (!skipSave) {
+                currentChatHistory.push({ role, text });
+            }
+        }
+
+        function showLoading() {
+            const container = document.createElement('div');
+            container.className = 'message-container';
+            container.id = 'loading-indicator';
+            container.innerHTML = `
+                <div class="message-content">
+                    <div class="msg-icon bot-icon"><i class="fas fa-robot"></i></div>
+                    <div class="typing-indicator">
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                    </div>
+                </div>
+            `;
+            chatScroller.appendChild(container);
+            chatScroller.scrollTop = chatScroller.scrollHeight;
+        }
+
+        function removeLoading() {
+            const el = document.getElementById('loading-indicator');
+            if(el) el.remove();
+        }
+
+        async function handleChat() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            appendMessage(message, 'user');
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            showLoading();
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        message,
+                        model: modelSelector.value 
+                    })
+                });
+
+                const data = await response.json();
+                removeLoading();
+
+                if (data.response) {
+                    appendMessage(data.response, 'bot');
+                    saveCurrentChat();
+                } else {
+                    appendMessage("The neural connection was interrupted. Please retry the link.", 'bot');
+                }
+            } catch (error) {
+                removeLoading();
+                appendMessage("System error. Neural link unstable. Verify backend connection.", 'bot');
+            }
+        }
+
+        function saveCurrentChat() {
+            if (currentChatHistory.length < 2) return;
+            
+            const firstUserMsg = currentChatHistory.find(m => m.role === 'user')?.text || "New Chat";
+            const chatTitle = firstUserMsg.substring(0, 30) + (firstUserMsg.length > 30 ? "..." : "");
+            
+            // Generate a simple ID if it doesn't exist
+            if (!window.currentChatId) window.currentChatId = Date.now();
+
+            const existingIndex = savedChats.findIndex(c => c.id === window.currentChatId);
+            const chatObj = {
+                id: window.currentChatId,
+                title: chatTitle,
+                messages: currentChatHistory
+            };
+
+            if (existingIndex > -1) {
+                savedChats[existingIndex] = chatObj;
+            } else {
+                savedChats.unshift(chatObj);
+            }
+
+            localStorage.setItem('anzal_chats', JSON.stringify(savedChats));
+            renderHistoryList();
+        }
+
+        function renderHistoryList() {
+            historyContainer.innerHTML = '';
+            savedChats.slice(0, 10).forEach(chat => {
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.innerHTML = `<i class="far fa-message"></i> ${chat.title}`;
+                item.onclick = () => loadChat(chat.id);
+                historyContainer.appendChild(item);
+            });
+        }
+
+        function loadChat(id) {
+            const chat = savedChats.find(c => c.id === id);
+            if (!chat) return;
+
+            window.currentChatId = id;
+            chatScroller.innerHTML = '';
+            currentChatHistory = [];
+            chat.messages.forEach(m => appendMessage(m.text, m.role, true));
+            currentChatHistory = [...chat.messages]; // Restore history for potential continues
+            
+            if (window.innerWidth <= 1024) toggleSidebar();
+        }
+
+        function quickAction(type) {
+            let msg = "";
+            if(type === 'latest project') msg = "What is your most recent AI project?";
+            if(type === 'explain rag') msg = "Can you explain how Retrieval Augmented Generation works in your chatbot?";
+            if(type === 'urdu poem') msg = "Would you share a beautiful Urdu Ghazal or some Roman Urdu poetry?";
+            
+            chatInput.value = msg;
+            handleChat();
+        }
+
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleChat();
+            }
+        });
+
+        function startNewChat() {
+            window.currentChatId = null;
+            currentChatHistory = [];
+            chatScroller.innerHTML = `
+                <div class="message-container">
+                    <div class="message-content">
+                        <div class="msg-icon bot-icon"><i class="fas fa-robot"></i></div>
+                        <div class="text-wrap">
+                            Neural connection reset. Ready for new input commands. 🌌
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatInput.value = '';
+            chatInput.focus();
+            if (window.innerWidth <= 1024) toggleSidebar();
+        }
+
+        // Functionalize all icon buttons
+        document.querySelectorAll('.icon-btn').forEach(btn => {
+            if(btn.id !== 'send-btn') {
+                btn.onclick = () => {
+                    const feature = btn.querySelector('i').className;
+                    let actionText = "feature";
+                    if(feature.includes('paperclip')) actionText = "File Attachment";
+                    if(feature.includes('microphone')) actionText = "Voice Input";
+                    
+                    appendMessage(`System Notification: The **${actionText}** module is currently undergoing neural calibration. Deployment expected in the next system update. 📡`, 'bot');
+                };
+            }
+        });
+    </script>
+</body>
+</html>

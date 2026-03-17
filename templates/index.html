@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Anzal - Premium Personal Portfolio & Resume Template for Software Engineers, AI Enthusiasts, and Creative Professionals.">
+    <meta name="keywords"
+        content="Portfolio Template, Resume, Software Engineer, AI, Machine Learning, Anzal Hussain Anzal, React, Modern UI">
+    <meta name="author" content="Anzal Hussain Anzal">
+    <title>Anzal - Modern Personal Portfolio & Resume Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chatbot.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- AI Interface Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+
+<body>
+    <nav aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                ANZAL <span>HUSSAIN</span>
+            </div>
+            <div class="links" role="navigation">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a
+                        href="#home">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a
+                        href="#about">About</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a
+                        href="#projects">Projects</a></div>
+                <!-- Poetry menu item removed -->
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a
+                        href="#jashn">Creative Ventures</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a
+                        href="/talk-with-me" class="talk-with-me-link">Talk With Me</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="600"><a
+                        href="#contact">Contact</a></div>
+            </div>
+            <button class="hamburg" aria-label="Open menu" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div class="dropdown" role="navigation">
+            <div class="links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <!-- Poetry menu item removed -->
+                <a href="#jashn">Creative Ventures</a>
+                <a href="/talk-with-me">Talk With Me</a>
+                <a href="#contact">Contact</a>
+                <button class="cancel" aria-label="Close menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <section id="home" data-aos="fade-up" data-aos-duration="1200">
+        <div class="main-container">
+            <div class="image" data-aos="zoom-out" data-aos-duration="1000">
+                <img src="{{ url_for('static', filename='ChatGPT Image Mar 17, 2026, 02_04_43 AM.png') }}" alt="Anzal Hussain Anzal">
+            </div>
+            <div class="content">
+                <h1 data-aos="fade-left" data-aos-duration="1500" data-aos-delay="700">Hi, I'm <span>Anzal</span></h1>
+                <div class="typewriter" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900">I'm an <span
+                        class="typewriter-text"></span><span class="cursor">|</span></div>
+                <p data-aos="flip-down" data-aos-duration="1500" data-aos-delay="1100">"Delivering high-performance AI
+                    solutions, modern web applications, and premium user experiences. A seasoned technologist with a
+                    passion for creative expression."</p>
+                <div class="btn-group" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="1800">
+                    <a href="#projects" class="btn">View My Tech Projects</a>
+                    <!-- Poetry button removed -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" data-aos="fade-up" data-aos-duration="1200">
+        <div class="about-section">
+            <div class="contact-container" style="margin-bottom: 0;">
+                <h2 data-aos="fade-up" data-aos-duration="1500">Professional Profile</h2>
+                <p data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100">I am a multi-disciplinary Software
+                    Engineer specializing in Artificial Intelligence, Machine Learning, and Web Development. This
+                    portfolio template showcases a balance between robust technical architecture and premium, visually
+                    engaging UI/UX design. My approach is methodical and hands-on, ensuring every project is highly
+                    functional, scalable, and customizable.</p>
+                <div class="about-box-inner" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>AI & Machine Learning Development (Vision Transformers, CNNs, YOLOv8)</li>
+                        <li> Web Engineering (FastAPI, Django , Forntend(VIDE code ))</li>
+                        <li>Data Analytics & Database Management (SQL, Tableau)</li>
+                        <li>UI/UX Prototyping and Interaction Design</li>
+                    </ul>
+                </div>
+                <div class="about-box-inner" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="300">
+                    <h3>Technical Arsenal</h3>
+                    <ul>
+                        <li><strong>Languages:</strong> Python, JavaScript , C++, SQL, HTML5, CSS</li>
+                        <li><strong>Frameworks/Libraries:</strong>Numpy , pandas ,Scikit-learn,Hugging Face
+                            Transformers, TensorFlow ,PyTorch, Django , FastAPI, LangChain,</li>
+                        <li><strong>Tools:</strong> Git, Docker, OpenAI API, FAISS </li>
+                    </ul>
+                </div>
+                <div class="about-box-inner" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="400">
+                    <h3>Professional Experience & Education</h3>
+                    <ul>
+                        <li><strong>Education:</strong> B.S. Software Engineering (In Progress), ICS Background</li>
+                        <li><strong>Key Expertise:</strong> Customer segmentation analysis, NLP Chatbots, Semantic
+                            Search</li>
+                        <li><strong>Methodology:</strong> Agile development with a focus on comprehensive documentation
+                            and clear, maintainable code structures.</li>
+                    </ul>
+                </div>
+                <div class="about-box-inner" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="500">
+                    <h3>Creative Identity</h3>
+                    <ul>
+                        <li>Strong passion for narrative storytelling, cinema, and aesthetic design.</li>
+                        <li>Co-founder of established literary societies promoting cultural arts.</li>
+                        <li>Demonstrated ability to merge technical precision with creative intuition.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Tech Projects section removed -->
+    <!-- My Ghazals section removed -->
+
+    <section id="projects" data-aos="fade-up" data-aos-duration="1200">
+        <div class="recent-projects-container">
+            <h2 data-aos="fade-up" data-aos-duration="1500">Showcase Projects</h2>
+            <div class="recent-projects-grid">
+
+                <!-- Project 1: MRI Alzheimer’s Classification -->
+                <div class="recent-project-card" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="100"
+                    data-title="MRI Alzheimer’s Classifier"
+                    data-desc="Automated system for classifying Alzheimer’s disease stages from MRI brain images using Vision Transformers (ViT) and hybrid deep learning models. The model categorizes MRI scans into four classes with a hybrid ensemble approach that improved accuracy to 96.3%.">
+                    <img src="{{ url_for('static', filename='MRI Alzheimer’s Classifier.png') }}" alt="AI Alzheimer’s Classifier" class="project-img">
+                    <div class="project-info">
+                        <h3>MRI Alzheimer’s Classifier</h3>
+                        <p>
+                            Automated system for classifying Alzheimer’s disease stages from MRI brain images using
+                            Vision Transformers (ViT) and hybrid deep learning models.
+                        </p>
+                        <a href="https://github.com/Anzal-hussain-Anzal/MRI-Based-Multi-Class-Alzheimer-s-Disease-Classification-using-ViT-and-Hybrid-Deep-Learning-Models"
+                            target="_blank" class="github-btn github-btn-strong">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Handwritten Digit Classification -->
+                <div class="recent-project-card" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200"
+                    data-title="Handwritten Digit Classification"
+                    data-desc="CNN-based project for handwritten digit recognition using the Street View House Numbers (SVHN) dataset. Implemented convolutional neural networks to classify real-world digits, achieving high accuracy and robust recognition in varying image conditions.">
+                    <img src="{{ url_for('static', filename='Handwritten Digit Classification.png') }}" alt="CNN Digit Classification" class="project-img">
+                    <div class="project-info">
+                        <h3>Handwritten Digit Classification</h3>
+                        <p>
+                            CNN-based project for handwritten digit recognition using the Street View House Numbers
+                            (SVHN) dataset.
+                        </p>
+                        <a href="https://github.com/Anzal-hussain-Anzal/Project_Title_Train_a_CNN_on_the_SVHN_Dataset_for_Classification"
+                            target="_blank" class="github-btn github-btn-strong">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Facial Emotion Detector -->
+                <div class="recent-project-card" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="300"
+                    data-title="Facial Emotion Detector"
+                    data-desc="Detects human facial emotions using convolutional neural networks. The model classifies expressions such as happiness, sadness, anger, and surprise in real-time. Demonstrates practical AI applications for human-computer interaction.">
+                    <img src="{{ url_for('static', filename='Facial Emotion Detector.png') }}" alt="Facial Emotion Detector" class="project-img">
+                    <div class="project-info">
+                        <h3>Facial Emotion Detector</h3>
+                        <p>
+                            Detects human facial emotions using convolutional neural networks.
+                        </p>
+                        <a href="https://github.com/Anzal-hussain-Anzal/Face-Expression-Recognition-Using-Convolutional-Neural-Networks-CNN-"
+                            target="_blank" class="github-btn github-btn-strong">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Smart Road Turn Detector -->
+                <div class="recent-project-card" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="400"
+                    data-title="Smart Road Turn Detector"
+                    data-desc="Uses YOLOv8 object detection to identify road turns and curves for smart transportation systems. Provides real-time alerts for drivers and can be integrated into autonomous navigation systems for enhanced road safety.">
+                    <img src="{{ url_for('static', filename='Smart Road Turn Detector.png') }}" alt="Smart Road Turn Detector" class="project-img">
+                    <div class="project-info">
+                        <h3>Smart Road Turn Detector</h3>
+                        <p>
+                            Uses YOLOv8 object detection to identify road turns and curves for smart transportation
+                            systems.
+                        </p>
+                        <a href="https://github.com/Anzal-hussain-Anzal/Object_Detection_Project" target="_blank"
+                            class="github-btn github-btn-strong">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5: Sentiment-Aware Topical Chatbot -->
+                <div class="recent-project-card" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="500"
+                    data-title="Sentiment-Aware Topical Chatbot"
+                    data-desc="Developed a chatbot capable of understanding user sentiment and responding contextually to topical queries. Built using transformer models, this system enhances user interaction by providing empathetic and relevant responses.">
+                    <img src="{{ url_for('static', filename='Sentiment-Aware Topical Chatbot.png') }}" alt="Sentiment-Aware Chatbot" class="project-img">
+                    <div class="project-info">
+                        <h3>Sentiment-Aware Topical Chatbot</h3>
+                        <p>
+                            Developed a chatbot capable of understanding user sentiment and responding contextually.
+                        </p>
+                        <a href="https://github.com/Anzal-hussain-Anzal/NLP-chatbot-Project-" target="_blank"
+                            class="github-btn github-btn-strong">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6: Smart Nutrition & Fitness Advisor -->
+                <div class="recent-project-card" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="600"
+                    data-title="Smart Nutrition & Fitness Advisor"
+                    data-desc="Personalized AI-powered advisor that provides nutrition and workout recommendations based on user data. Combines machine learning and health metrics to suggest meal plans and exercises for optimal fitness and wellness.">
+                    <img src="{{ url_for('static', filename='Smart Nutrition & Fitness Advisor.png') }}" alt="Smart Nutrition & Fitness Advisor"
+                        class="project-img">
+                    <div class="project-info">
+                        <h3>Smart Nutrition & Fitness Advisor</h3>
+                        <p>
+                            Personalized AI-powered advisor for nutrition and workout recommendations.
+                        </p>
+                        <a href="https://github.com/Anzal-hussain-Anzal/-Personalized-Nutritional-and-Workout-Advisor"
+                            target="_blank" class="github-btn github-btn-strong">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section id="jashn" data-aos="fade-up" data-aos-duration="1200">
+        <div class="jashn-container">
+            <h2 data-aos="fade-up" data-aos-duration="1500">Creative Ventures</h2>
+            <p data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+                <strong>Jashn-e-Sukhan</strong> is a prime example of community leadership and cultural preservation.
+                Co-founded to organize large-scale literary events (mushairas), this venture showcases event management,
+                public speaking, and a commitment to preserving the tradition of Urdu shayari.
+            </p>
+            <p data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400">
+                <strong>Impact:</strong> Successfully brings together local communities, fostering creativity and
+                networking among artists and professionals.
+            </p>
+        </div>
+    </section>
+    <section id="contact" data-aos="fade-up" data-aos-duration="1200">
+        <div class="contact-container">
+            <h2 data-aos="fade-up" data-aos-duration="1500">Contact Me</h2>
+            <p data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">Interested in collaboration, AI
+                consulting, or tech opportunities? Let's connect.</p>
+            <form id="portfolio-contact" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400">
+                <input type="text" name="name" placeholder="Name" required aria-label="Name">
+                <input type="email" name="email" placeholder="Email" required aria-label="Email">
+                <textarea name="message" placeholder="Message" required aria-label="Message"></textarea>
+                <button type="submit" aria-label="Send message">Send Message</button>
+            </form>
+            <div class="social-links" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="600">
+                <a href="mailto:anzaljussainpoetry@gmail.com" aria-label="Email"><i
+                        class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/Anzal-hussain-Anzal" target="_blank" aria-label="GitHub profile"><i
+                        class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/anzal-hussain-85b75b304/" target="_blank"
+                    aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/anzalhussainanzal/" target="_blank" aria-label="Instagram profile"><i
+                        class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 0,
+            mirror: true
+        });
+    </script>
+    <button id="chatBtn" aria-label="Open AI Neural Link">
+        <img src="{{ url_for('static', filename='chatbortpic.png') }}" alt="Anzal AI">
+        <div class="chat-greeting" id="chat-greeting">Anzal Hussain's Digital Identity is Ready. 📡</div>
+    </button>
+
+    <div id="chat-widget">
+        <header id="chat-header">
+            <span>NEURAL INTERFACE MINI</span>
+            <button id="close-chat"><i class="fas fa-times"></i></button>
+        </header>
+
+        <div id="chat-container">
+            <div class="bubble ai-msg">
+                Welcome to my neural interface! I am ready to assist with any technical or creative dialogue. 🌌
+            </div>
+        </div>
+
+        <div id="typing">SYSTEM ANALYZING...</div>
+
+        <div class="mini-chat-input">
+            <input type="text" id="userInput" placeholder="Initiate link..." autocomplete="off">
+            <button class="mini-chat-send" id="sendBtn" onclick="handleSend()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    <div id="projectModal" class="modal">
+        <div class="modal-content" data-aos="zoom-in">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle">Project Title</h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalDesc">Detailed description goes here...</p>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>

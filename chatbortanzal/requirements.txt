@@ -1,0 +1,6 @@
+groq
+python-dotenv
+flask
+flask-cors
+numpy
+scikit-learn

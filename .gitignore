@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.vscode/
+.idea/
+data/knowledge_base.json
+# If you want to keep your data, uncomment the line above or keep it to avoid uploading local KB.
